@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              scorebg: "#e5e8ee",
+              ground: "#f4f8ff",
+              primary: "#022964",
+              light: "#68bafd",
+              standart: "#3784fb",
+              greybg: "#ebeef4",
+              redth: "#d21a1a",
+              orangeth: "#fbae04",
+              blueth: "#3784fb",
+              yellowth: "#ffda4f",
+              greenth: "#67b25a",
+            },
+            margin: {
+              "-100": "-27.5rem",
+            },
+          },
+          fontFamily: {
+            sans: ["ui-sans-serif", "system-ui"],
+            serif: ["ui-serif", "Georgia"],
+            mono: ["ui-monospace", "SFMono-Regular"],
+            display: ["Oswald"],
+            body: ['"Open Sans"'],
+            title: ["Tajawal"],
+          },
+        },
+      };
+    </script>
+    <title>Driver Scorecard</title>
+  </head>
+
+  <body class="bg-ground">
+    <div class="flex flex-col w-full border-top">
+      <div
+        class="w-full h-3 border-none bg-gradient-to-r from-standart to-light"
+      ></div>
+      <div class="flex mx-auto w-10/12 flex-col">
+        <!-- Header -->
+        <div class="flex justify-center intem-center mt-14">
+          <img
+            src="./assets/logo-blue.svg"
+            alt="datatect logo"
+            class="h-8 w-auto"
+            -
+          />
+        </div>
+
+        <!-- title & divider -->
+        <div
+          class="mt-10 h-8 flex w-full flex-row justify-between intems-center spaxe-x-2"
+        >
+          <div class="h-full w-4/12">
+            <div class="h-4 border-b-2 border-standart"></div>
+          </div>
+
+          <div
+            class="flex w-4/12 text-primary font-title text-center items-center justify-center tracking-wider tracking-[.45em]"
+          >
+            <p class="text-2xl">DRIVER SCORECARD</p>
+          </div>
+
+          <div class="h-full w-4/12">
+            <div class="h-4 border-b-2 border-standart"></div>
+          </div>
+        </div>
+
+        <!-- Person & Date -->
+        <div class="flex flex-row justify-between items-center mt-14">
+          <div class="flex flex-col">
+            <div class="flex text-sm text-primary">Performance report of</div>
+            <div class="flex text-2xl text-primary font-bold mt-1">
+              Mr/ Mrs. Chloe Moninka
+            </div>
+          </div>
+
+          <div
+            class="flex flex-row justify-start items-center bg-gradient-to-r from-blue-500 to-cyan-500 to-blue-500 px-4 py-2 rounded-sm"
+          >
+            <div class="w-4 h-4 mr-3">
+              <img src="/assets/Calendar.svg" alt="calender icon" />
+            </div>
+
+            <div class="text-white text-sm font-bold">
+              Senin, 7 January 2022
+            </div>
+          </div>
+        </div>
+
+        <!-- LINE CHART -->
+        <div class="flex flex-col bg-greybg w-full mt-14 px-10 py-10">
+          <div class="flex flex-row justify-between items-center mb-5">
+            <div
+              class="flex h-full flex items-center text-xl text-primary font-bold"
+            >
+              LAST 5 SCORE
+            </div>
+
+            <!-- Label -->
+            <div class="flex flex-row items-center space-x-6">
+              <div class="flex flex-row items-center">
+                <div class="h-4 w-4 bg-redth mr-2"></div>
+                <div
+                  class="font-sans text-sm font-normal tracking-wider text-primary"
+                >
+                  Braking
+                </div>
+              </div>
+
+              <div class="flex flex-row items-center">
+                <div class="h-4 w-4 bg-orangeth mr-2"></div>
+                <div
+                  class="font-sans text-sm font-normal tracking-wider text-primary"
+                >
+                  Stopping
+                </div>
+              </div>
+
+              <div class="flex flex-row items-center">
+                <div class="h-4 w-4 bg-blueth mr-2"></div>
+                <div
+                  class="font-sans text-sm font-normal tracking-wider text-primary"
+                >
+                  Turning
+                </div>
+              </div>
+
+              <div class="flex flex-row items-center">
+                <div class="h-4 w-4 bg-yellowth mr-2"></div>
+                <div
+                  class="font-sans text-sm font-normal tracking-wider text-primary"
+                >
+                  Driving
+                </div>
+              </div>
+
+              <div class="flex flex-row items-center">
+                <div class="h-4 w-4 bg-greenth mr-2"></div>
+                <div
+                  class="font-sans text-sm font-normal tracking-wider text-primary"
+                >
+                  Smoothess
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full flex flex-col bg-white p-2">
+            <div id="lineChart"></div>
+            <div class="flex w-full bg-white h-5 -mt-8 z-40"></div>
+          </div>
+        </div>
+
+        <!-- RADAR CHART -->
+        <div class="flex w-full flex-col mt-10">
+          <div class="text-primary text-2xl font-bold">RADAR CHART</div>
+
+          <div class="flex w-full flex-row mt-5 space-x-10">
+            <div class="flex w-6/12 flex-col ">
+              <!-- RADAR CHART -->
+              <div id="radarChart"></div>
+
+              <!-- SCORE OVERALL -->
+              <div
+                class="w-24 h-22 flex flex-col rounded-xl bg-scorebg z-40 -mt-100 pb-2 ml-5"
+              >
+                <div
+                  class="flex mx-auto w-full py-1 px-2 font-bold tracking-wide justify-center items-center bg-primary text-white text-xs rounded-tl-xl rounded-tr-xl"
+                >
+                  Overall
+                </div>
+
+                <div
+                  class="text-xl text-primary font-bold flex mx-auto justify-content items-center mt-2"Q
+                >
+                  70
+                </div>
+
+                <div
+                  class="text-xs text-primary flex mx-auto justify-content items-center mt-1"
+                >
+                  from 100
+                </div>
+              </div>
+            </div>
+
+            <!-- Comment -->
+            <div class="flex w-auto flex-col bg-white p-6 space-y-5">
+              <!-- Smoothess -->
+              <div class="flex flex-col border-b border-blue-800 pb-5">
+                <button
+                  class="w-36 bg-greenth text-white font-bold py-1 px-2 rounded"
+                >
+                  Smoothless
+                </button>
+
+                <ul class="list-outside list-disc mt-3">
+                  <li class="text-greenth ml-5">
+                    <span class="text-primary text-sm">
+                      Pengoperasian rem dan gas saat berkendara sangat mulus.
+                      Kecelakaan terjadi jika sedikit saja Anda lengah. Mari
+                      tetap antisipas bahaya berkendara.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Branking -->
+              <div class="flex flex-col border-b border-blue-800 pb-5">
+                <button
+                  class="w-36 bg-redth text-white font-bold py-1 px-2 rounded"
+                >
+                  Braking
+                </button>
+
+                <ul class="list-outside list-disc mt-3">
+                  <li class="text-redth ml-5">
+                    <span class="text-primary text-sm">
+                      Ada masalah pada pengoprasian rem.
+                    </span>
+                  </li>
+
+                  <li class="text-redth ml-5">
+                    <span class="text-primary text-sm">
+                      Pertahankan antisipasi bahaya berkendara dan lanjutkan
+                      pengoperasian rem seperti saat ini.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Stopping -->
+              <div class="flex flex-col border-b border-blue-800 pb-5">
+                <button
+                  class="w-36 bg-orangeth text-white font-bold py-1 px-2 rounded"
+                >
+                  Stopping
+                </button>
+
+                <ul class="list-outside list-disc mt-3">
+                  <li class="text-orangeth ml-5">
+                    <span class="text-primary text-sm">
+                      Tidak ada masalah pada pengoperasian rem.
+                    </span>
+                  </li>
+
+                  <li class="text-orangeth ml-5">
+                    <span class="text-primary text-sm">
+                      Tetap berhati-hati sampai mobil benar-benar berhenti,
+                      pertahankan cara berhenti yang mulus seperti ini.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Turning -->
+              <div class="flex flex-col border-b border-blue-800 pb-5">
+                <button
+                  class="w-36 bg-blueth text-white font-bold py-1 px-2 rounded"
+                >
+                  Turning
+                </button>
+
+                <ul class="list-outside list-disc mt-3">
+                  <li class="text-blueth ml-5">
+                    <span class="text-primary text-sm">
+                      Tingkat bahaya saat berbelok sangat tinggi. Resiko
+                      tabrakan 80% - 10%. Kurangilah kecepatan lebih dari 20km
+                      sebelum berbelok.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Driving -->
+              <div class="flex flex-col border-b border-blue-800 pb-5">
+                <button
+                  class="w-36 bg-yellowth text-white font-bold py-1 px-2 rounded"
+                >
+                  Driving
+                </button>
+
+                <ul class="list-outside list-disc mt-3">
+                  <li class="text-yellowth ml-5">
+                    <span class="text-primary text-sm">
+                      Setir dikendalikan dengan sangat terburu - buru
+                      berdasarkan kecepatan. Indeks ketidaknyamanan penumpang
+                      80% - 100%.
+                    </span>
+                  </li>
+
+                  <li class="text-yellowth ml-5">
+                    <span class="text-primary text-sm">
+                      Pengendalian setir Anda berbahaya, jadi lebih
+                      berhati-hatilah.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    /******************************************************
+     *
+     *
+     * LINE CHART
+     *
+     */
+
+    const lineChartOptions = {
+      dataLabels: {
+        enabled: false,
+      },
+
+      // Label Colors --->
+      colors: [
+        "#d21a1a", // Merah
+        "#fbae04", // Kuning tua
+        "#3784fb", // Biru
+        "#ffda4f", // Kuning
+        "#67b25a", // Hijau
+      ],
+
+      chart: {
+        type: "line",
+        height: 500,
+        width: 1000,
+        zoom: {
+          enable: false,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+
+      series: [
+        {
+          name: "Braking",
+          data: [10, 15, 18, 15, 30],
+        },
+        {
+          name: "Stopping",
+          data: [5, 15, 20, 15, 5],
+        },
+        {
+          name: "Turning",
+          data: [20, 25, 20, 25, 25],
+        },
+        {
+          name: "Driving",
+          data: [25, 35, 30, 25, 35],
+        },
+        {
+          name: "Driving",
+          data: [5, 5, 10, 5, 10],
+        },
+      ],
+      xaxis: {
+        categories: [
+          "03/01/22",
+          "04/01/22",
+          "05/01/22",
+          "06/01/22",
+          "07/01/22",
+        ],
+      },
+
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: "straight",
+      },
+      markers: {
+        size: 3,
+        strokeColors: "#fff",
+        strokeWidth: 0,
+      },
+      stroke: {
+        show: true,
+        curve: "straight",
+        lineCap: "butt",
+        colors: undefined,
+        width: 2,
+        dashArray: 0,
+      },
+    };
+
+    const lineChart = new ApexCharts(
+      document.querySelector("#lineChart"),
+      lineChartOptions
+    );
+
+    lineChart.render();
+
+    /******************************************************
+     *
+     *
+     * RADAR CHART
+     *
+     */
+
+    const radarChartOptions = {
+      series: [
+        {
+          name: "Radar Report",
+          data: [10, 19, 18, 19, 8],
+        },
+      ],
+      plotOptions: {
+        radar: {
+          size: 125,
+          polygons: {
+            strokeColors: "#e9e9e9",
+            fill: {
+              colors: ["#f8f8f8", "#fff"],
+            },
+          },
+        },
+      },
+      markers: {
+        size: 4,
+        colors: ["#fff"],
+        strokeColor: "#3784fb",
+        strokeWidth: 2,
+      },
+
+      chart: {
+        background: "#fff",
+        height: 450,
+        width: 450,
+        type: "radar",
+        zoom: {
+          enable: false,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      xaxis: {
+        categories: ["Braking", "Stoping", "Turning", "Driving", "Smoothess"],
+      },
+    };
+
+    var radarChart = new ApexCharts(
+      document.querySelector("#radarChart"),
+      radarChartOptions
+    );
+    radarChart.render();
+  </script>
+</html>
