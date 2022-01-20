@@ -174,7 +174,7 @@
           <div class="text-primary text-2xl font-bold">RADAR CHART</div>
 
           <div class="flex w-full flex-row mt-5 space-x-10">
-            <div class="flex w-6/12 flex-col ">
+            <div class="flex w-6/12 flex-col">
               <!-- RADAR CHART -->
               <div id="radarChart"></div>
 
@@ -189,7 +189,8 @@
                 </div>
 
                 <div
-                  class="text-xl text-primary font-bold flex mx-auto justify-content items-center mt-2"Q
+                  class="text-xl text-primary font-bold flex mx-auto justify-content items-center mt-2"
+                  Q
                 >
                   70
                 </div>
@@ -386,6 +387,15 @@
           "06/01/22",
           "07/01/22",
         ],
+        labels: {
+          show: true,
+          style: {
+            colors: ["#022964", "#022964", "#022964", "#022964", "#022964"], // or Array(5).fill('#022964') --> warna untuk x label
+            fontSize: "14px",
+            fontFamily: "Arial",
+            fontWeight: "bold",
+          },
+        },
       },
 
       dataLabels: {
@@ -462,6 +472,15 @@
       },
       xaxis: {
         categories: ["Braking", "Stoping", "Turning", "Driving", "Smoothess"],
+        labels: {
+          show: true,
+          style: {
+            colors: ["#022964", "#022964", "#022964", "#022964", "#022964"],
+            fontSize: "12px",
+            fontFamily: "Arial",
+            fontWeight: "bold",
+          },
+        },
       },
     };
 
